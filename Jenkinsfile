@@ -6,7 +6,7 @@ pipeline {
      stage('loginintoECR') {
       steps {
         
-        sh 'sudo aws ecr-public get-login-password --region us-east-1'
+        sh 'sudo aws -S ecr-public get-login-password --region us-east-1'
         sh 'sudo docker login --username AWS --password-stdin public.ecr.aws/s9e0w9o5'
 
       }
