@@ -5,7 +5,7 @@ pipeline {
     stage('Build') {
       steps {
         git branch: 'main', url: 'https://github.com/saisrinisrinivas/nodejsrepo.git'
-        sh 'sudo docker build -t nodejs .'
+        sh 'docker build -t nodejs .'
       }
     }
     stage('loginintoECR') {
