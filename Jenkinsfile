@@ -6,8 +6,8 @@ pipeline {
      stage('loginintoECR') {
       steps {
         
-        sh 'sudo aws -S ecr-public get-login-password --region us-east-1'
-        sh 'sudo docker login --username AWS --password-stdin public.ecr.aws/s9e0w9o5'
+        sh 'aws ecr-public get-login-password --region us-east-1'
+        sh 'docker login --username AWS --password-stdin public.ecr.aws/s9e0w9o5'
 
       }
     }
@@ -20,8 +20,8 @@ pipeline {
    
     stage('PushintoECR') {
       steps {
-        sh 'sudo docker tag demojenkins:latest public.ecr.aws/s9e0w9o5/demojenkins:latest'
-        sh 'sudo docker push public.ecr.aws/s9e0w9o5/demojenkins:latest'
+        sh 'docker tag demojenkins:latest public.ecr.aws/s9e0w9o5/demojenkins:latest'
+        sh 'docker push public.ecr.aws/s9e0w9o5/demojenkins:latest'
 
       }
     }
