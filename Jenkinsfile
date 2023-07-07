@@ -4,32 +4,26 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        git branch: 'main', url: 'https://github.com/srikanth458hk/nodejsrepo.git'
+        git branch: 'main', url: 'https://github.com/saisrinisrinivas/nodejsrepo.git'
         sh 'docker build -t nodejs .'
       }
     }
     stage('loginintoECR') {
       steps {
         
-        sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/y6s3n1h9'
+        sh 'sudo aws ecr-public get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin public.ecr.aws/s9e0w9o5'
 
       }
     }
     stage('PushintoECR') {
       steps {
-        sh 'docker tag nodejs:latest public.ecr.aws/y6s3n1h9/nodejs:latest'
-        sh 'docker push public.ecr.aws/y6s3n1h9/nodejs:latest'
+        sh 'docker tag demojenkins:latest public.ecr.aws/s9e0w9o5/demojenkins:latest'
+        sh 'docker push public.ecr.aws/s9e0w9o5/demojenkins:latest'
 
       }
     }
-    stage('DeploytoECS') {
-      steps {
-        
-         sh "arn:aws:ecs:ap-south-1:125523629880:task-definition/nodejstask:1"
-         sh "aws ecs update-service --cluster Nodejscluster --service nodejsservice --task-definition nodejstask:nodejstask:1"
-
-        }
-      }
+  }
+}
     
 
     
