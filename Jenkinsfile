@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('loginintoECR') {
       steps {
-        withCredentials([string(credentialsId: 'iamuser1')]) {
+        withCredentials(credentialsId:'iamuser1') {
           script {
             def awsPassword = sh(
               script: 'aws ecr-public get-login-password --region us-east-1',
