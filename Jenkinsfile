@@ -4,15 +4,9 @@ pipeline {
   stages {
     stage('loginintoECR') {
       steps {
-        withCredentials(credentialsId:'iamuser1') {
-          script {
-            def awsPassword = sh(
-              script: 'aws ecr-public get-login-password --region us-east-1',
-              returnStdout: true
-            ).trim()
-            sh "echo '$awsPassword' | docker login --username AWS --password-stdin public.ecr.aws/s9e0w9o5"
-          }
-        }
+        
+        sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/s9e0w9o5'
+
       }
     }
 
