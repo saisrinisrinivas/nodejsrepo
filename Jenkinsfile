@@ -26,7 +26,8 @@ pipeline {
     }
      stage('DeployIntoEc2') {
       steps {
-      sh '''docker run --name = "Demo" public.ecr.aws/s9e0w9o5/demojenkins:latest 
+      sh '''docker pull public.ecr.aws/s9e0w9o5/demojenkins:latest 
+      docker run public.ecr.aws/s9e0w9o5/demojenkins:latest 
             
       '''
       }
