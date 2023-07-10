@@ -24,6 +24,12 @@ pipeline {
         sh 'docker push public.ecr.aws/s9e0w9o5/demojenkins:latest'
       }
     }
+    stage('DeleteContainers') {
+      steps {
+      sh 'docker rm -f $(docker ps -a -q)'
+      sh 'docker rmi $(docker images -q -a)'
+      }
+    }
      stage('DeployIntoEc2') {
       steps {
       sh '''docker pull public.ecr.aws/s9e0w9o5/demojenkins:latest 
