@@ -27,7 +27,7 @@ pipeline {
     stage('DeleteContainers') {
       steps {
       sh 'docker rm -f $(docker ps -a -q)'
-      sh 'docker rmi $(docker images -q -a)'
+      sh 'docker rmi -f $(docker images -q -a)'
       }
     }
      stage('DeployIntoEc2') {
